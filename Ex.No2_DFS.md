@@ -1,5 +1,5 @@
 # Ex.No: 2  Implementation of Depth First Search
-### DATE:12.08.2024                                                                
+### DATE: 12.08.2024                                                                          
 ### REGISTER NUMBER : 212222220007
 ### AIM: 
 To write a python program to implement Depth first Search. 
@@ -15,26 +15,27 @@ To write a python program to implement Depth first Search.
 ```
 # Using a Python dictionary to act as an adjacency list
 graph = {
- '5' : ['3','7'],
- '3' : ['2', '4'],
- '7' : ['8'],
- '2' : [],
- '4' : ['8'],
- '8' : []
+'5' : ['3','7'],
+'3' : ['2', '4'],
+'7' : ['8'],
+'2' : [],
+'4' : ['8'],
+'8' : []
 }
 visited = set() # Set to keep track of visited nodes of graph.
 def dfs(visited, graph, node): #function for dfs
- if node not in visited:
- print (node)
- visited.add(node)
- for neighbour in graph[node]:
- dfs(visited, graph, neighbour)
+if node not in visited:
+print (node)
+visited.add(node)
+for neighbour in graph[node]:
+dfs(visited, graph, neighbour)
 # Driver Code
 print("Following is the Depth-First Search")
-dfs(visited, graph, '5') 
+dfs(visited, graph, '5')
 ```
+
 ### Output:
-![image](https://github.com/Mena-Rossini/AI_Lab_2023-24/assets/102855266/859e1573-cb3e-49ea-89d1-eaae4e1afb48)
+![image](https://github.com/NamithaS2710/AI_Lab_2023-24/assets/133190822/4f7f7c15-d5f6-484c-9df6-4a08ac98c1d4)
 
 ### Result:
 Thus the depth first search order was found sucessfully.
