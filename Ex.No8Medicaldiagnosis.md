@@ -1,7 +1,6 @@
 # Ex.No: 8  Logic Programming –  Medical Diagnosis Expert System
-### DATE:                                                                            
-### REGISTER NUMBER : 
-### AIM: 
+### DATE:09.09.2024                                                                            
+### REGISTER NUMBER : 212222220007
 Write a Prolog program to build a medical Diagnosis Expert System.
 ###  Algorithm:
 1. Start the program.
@@ -14,20 +13,43 @@ Write a Prolog program to build a medical Diagnosis Expert System.
         
 
 ### Program:
-
-
-
-
-
-
-
-
-
+```
+ symptom(Patient,fever),
+ symptom(Patient,headache),
+ symptom(Patient,runny_nose),
+ symptom(Patient,rash).
+hypothesis(Patient,flu) :-
+ symptom(Patient,fever),
+ symptom(Patient,headache),
+ symptom(Patient,body_ache),
+ symptom(Patient,conjunctivitis),
+ symptom(Patient,chills),
+ symptom(Patient,sore_throat),
+ symptom(Patient,runny_nose),
+ symptom(Patient,cough).
+hypothesis(Patient,common_cold) :-
+ symptom(Patient,headache),
+ symptom(Patient,sneezing),
+ symptom(Patient,sore_throat).
+```
+```
+hypothesis(Patient,chicken_pox) :-
+ symptom(Patient,fever),
+ symptom(Patient,chills),
+ symptom(Patient,body_ache), 
+ symptom(Patient,rash).
+hypothesis(Patient,measles) :-
+ symptom(Patient,cough),
+ symptom(Patient,sneezing),
+ symptom(Patient,runny_nose).
+symptom(raju,headache).
+symptom(raju,sneezing).
+symptom(raju,sore_throat).
+```
 
 
 ### Output:
-
-
+![image](https://github.com/Pavishmi/AI_Lab_2023-24/assets/136091280/4701e2fc-fcc1-40f1-8128-440551101eb4)
 
 ### Result:
 Thus the simple medical diagnosis system was built sucessfully.
