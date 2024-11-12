@@ -91,7 +91,7 @@ X_test.shape
 predicted_stock_price_scaled = model.predict(X_test)
 predicted_stock_price = sc.inverse_transform(predicted_stock_price_scaled)
 
-print("NAME:Dario G \nREGISTER NUMBER: 212222230027\n ")
+print("NAME:Bala R \nREGISTER NUMBER: 21222222007\n ")
 plt.plot(np.arange(0,1384),inputs, color='yellow', label = 'Test(Real) Google stock price')
 plt.plot(np.arange(60,1384),predicted_stock_price, color='green', label = 'Predicted Google stock price')
 plt.title('Google Stock Price Prediction')
@@ -104,7 +104,8 @@ plt.show()
 ## Output
 
 ### True Stock Price, Predicted Stock Price vs time
-![Screenshot 2024-10-04 104959](https://github.com/user-attachments/assets/15a1d4b7-087a-4282-9022-a334cceb46ec)
+![373513530-15a1d4b7-087a-4282-9022-a334cceb46ec](https://github.com/user-attachments/assets/d7e8ccf8-f732-436f-81e8-11ff4bfcbdb6)
+
 
 ![Screenshot 2024-10-04 105039](https://github.com/user-attachments/assets/1ce3f06c-59e7-4d71-8cd9-f1c7ae1904cc)
 
