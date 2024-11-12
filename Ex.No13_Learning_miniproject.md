@@ -1,110 +1,116 @@
 # Ex.No: 13 Learning – Use Supervised Learning  
 ### DATE:30.09.2024                                                                            
 ### REGISTER NUMBER : 212222220007
-### AIM: 
-To write a program to train the classifier for Diabetes Prediction.
-### Algorithm:
-1.Start the program.
+## AIM
 
-2.Import required Python libraries, including NumPy, Pandas, Google Colab, Gradio, and various scikit-learn modules.
+To develop a Recurrent Neural Network model for stock price prediction.
 
-3.Mount Google Drive using Google Colab's 'drive.mount()' method to access the data file located in Google Drive.
-
-4.Install the Gradio library using 'pip install gradio'.
-
-5.Load the diabetes dataset from a CSV file ('diabetes.csv') using Pandas.
-
-6.Separate the target variable ('Outcome') from the input features and Scale the input features using the StandardScaler from scikit-learn.
-
-7.Create a multi-layer perceptron (MLP) classifier model using scikit-learn's 'MLPClassifier'.
-
-8.Train the model using the training data (x_train and y_train).
-
-9.Define a function named 'diabetes' that takes input parameters for various features and Use the trained machine learning model to predict the outcome based on the input features.
-
-10.Create a Gradio interface using 'gr.Interface' and Specify the function to be used to make predictions based on user inputs.
-
-11.Launch the Gradio web application, enabling sharing, to allow users to input their data and get predictions regarding diabetes risk.
-
-12.Stop the program.
-
-### Program:
+## Problem Statement and Dataset
+Develop a Recurrent Neural Network (RNN) model to predict the stock prices of Google. The goal is to train the model using historical stock price data and then evaluate its performance on a separate test dataset
 ```
-#import packages
+Dataset: The dataset consists of two CSV files:
+    Trainset.csv: This file contains historical stock price data of Google, which will be used for training the RNN model. It includes features such as the opening price of the stock.
+    Testset.csv: This file contains additional historical stock price data of Google, which will be used for testing the trained RNN model. Similarly, it includes features such as the opening price of the stock.
+
+The objective is to build a model that can effectively learn from the patterns in the training data to make accurate predictions on the test data.
+```
+
+## Design Steps
+
+### Step 1:
+Read and preprocess training data, including scaling and sequence creation.
+### Step 2:
+Initialize a Sequential model and add SimpleRNN and Dense layers.
+### Step 3:
+Compile the model with Adam optimizer and mean squared error loss.
+### Step 4:
+Train the model on the prepared training data.
+### Step 5:
+Preprocess test data, predict using the trained model, and visualize the results.
+
+
+## Program
+```
 import numpy as np
+import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
+from keras import layers
+from keras.models import Sequential
 
-from google.colab import drive
-drive.mount('/content/gdrive')
+dataset_train = pd.read_csv('trainset.csv')
+dataset_train.columns
+dataset_train.head()
+train_set = dataset_train.iloc[:,1:2].values
+type(train_set)
+train_set.shape
 
-pip install gradio
+sc = MinMaxScaler(feature_range=(0,1))
+training_set_scaled = sc.fit_transform(train_set)
+training_set_scaled.shape
 
-pip install typing-extensions --upgrade
+X_train_array = []
+y_train_array = []
+for i in range(60, 1259):
+  X_train_array.append(training_set_scaled[i-60:i,0])
+  y_train_array.append(training_set_scaled[i,0])
+X_train, y_train = np.array(X_train_array), np.array(y_train_array)
+X_train1 = X_train.reshape((X_train.shape[0], X_train.shape[1],1))
 
-import gradio as gr
+X_train.shape
+length = 60
+n_features = 1
 
-cd /content/gdrive/MyDrive/demo/gradio_project-main
+model = Sequential()
+model.add(layers.SimpleRNN(150,input_shape=(length,n_features)))
+model.add(layers.Dense(1))
 
-#get the data
-data = pd.read_csv('diabetes.csv')
-data.head()
+model.compile(optimizer='adam', loss='mse')
 
-print(data.columns)
+print("NAME: DARIO G  \nREGISTER NUMBER: 212222230027 \n        ")
+model.summary())
 
-x = data.drop(['Outcome'], axis=1)
-y = data['Outcome']
-print(x[:5])
+model.fit(X_train1,y_train,epochs=30, batch_size=15)
 
-from multi_imbalance.utils.plot import plot_cardinality_and_2d_data
-plot_cardinality_and_2d_data(x, y, 'PIMA Diabetes Prediction Data set')
+dataset_test = pd.read_csv('testset.csv')
+test_set = dataset_test.iloc[:,1:2].values
+test_set.shape
+dataset_total = pd.concat((dataset_train['Open'],dataset_test['Open']),axis=0)
 
-#split data
-from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test= train_test_split(x,y)
+inputs = dataset_total.values
+inputs = inputs.reshape(-1,1)
+inputs_scaled=sc.transform(inputs)
+X_test = []
+for i in range(60,1384):
+  X_test.append(inputs_scaled[i-60:i,0])
+X_test = np.array(X_test)
+X_test = np.reshape(X_test,(X_test.shape[0], X_test.shape[1],1))
 
-#scale data
-from sklearn.preprocessing import StandardScaler
-scaler = StandardScaler()
-x_train_scaled = scaler.fit_transform(x_train)
-x_test_scaled = scaler.fit_transform(x_test)
+X_test.shape
 
-#instatiate model
-from sklearn.neural_network import MLPClassifier
-model = MLPClassifier(max_iter=1000, alpha=1)
-model.fit(x_train, y_train)
-print("Model Accuracy on training set:", model.score(x_train, y_train))
-print("Model Accuracy on Test Set:", model.score(x_test, y_test))
+predicted_stock_price_scaled = model.predict(X_test)
+predicted_stock_price = sc.inverse_transform(predicted_stock_price_scaled)
 
-print(data.columns)
-
-#create a function for gradio
-def diabetes(Pregnancies, Glucose, Blood_Pressure, SkinThickness, Insulin, BMI,Diabetes_Pedigree, Age):
-    x = np.array([Pregnancies,Glucose,Blood_Pressure,SkinThickness,Insulin,BMI,Diabetes_Pedigree,Age])
-    prediction = model.predict(x.reshape(1, -1))
-    if(prediction==0):
-      return "NO"
-    else:
-      return "YES"
-
-#create a function for gradio
-def diabetes(Pregnancies, Glucose, Blood_Pressure, SkinThickness, Insulin, BMI,Diabetes_Pedigree, Age):
-    x = np.array([Pregnancies,Glucose,Blood_Pressure,SkinThickness,Insulin,BMI,Diabetes_Pedigree,Age])
-    prediction = model.predict(x.reshape(1, -1))
-    return prediction
-
-outputs = gr.outputs.Textbox()
-app = gr.Interface(fn=diabetes, inputs=['number','number','number','number','number','number','number','number'], outputs=outputs,description="Detection of Diabeties")
-app.launch(share=True)
+print("NAME:Dario G \nREGISTER NUMBER: 212222230027\n ")
+plt.plot(np.arange(0,1384),inputs, color='yellow', label = 'Test(Real) Google stock price')
+plt.plot(np.arange(60,1384),predicted_stock_price, color='green', label = 'Predicted Google stock price')
+plt.title('Google Stock Price Prediction')
+plt.xlabel('Time')
+plt.ylabel('Google Stock Price')
+plt.legend()
+plt.show()
 ```
 
-### Output:
+## Output
 
-![image](https://github.com/Mena-Rossini/AI_Lab_2023-24/assets/102855266/cf2bf2cf-213e-46da-8c3c-e2b1b4b82eb6)
+### True Stock Price, Predicted Stock Price vs time
+![Screenshot 2024-10-04 104959](https://github.com/user-attachments/assets/15a1d4b7-087a-4282-9022-a334cceb46ec)
 
-![image](https://github.com/Mena-Rossini/AI_Lab_2023-24/assets/102855266/89af30fd-ecbc-4798-8324-723cd7304139)
+![Screenshot 2024-10-04 105039](https://github.com/user-attachments/assets/1ce3f06c-59e7-4d71-8cd9-f1c7ae1904cc)
 
-![image](https://github.com/Mena-Rossini/AI_Lab_2023-24/assets/102855266/fd6636fe-9fd1-4ee8-901b-ca38c271f1f4)
+### Mean Square Error
+![Screenshot 2024-10-04 105115](https://github.com/user-attachments/assets/822fe1f4-78cb-4e80-abbe-299e9a42f07e)
 
 
-### Result:
-Thus the system was trained successfully and the prediction was carried out.
+## Result
+Thus a Recurrent Neural Network model for stock price prediction is done.
