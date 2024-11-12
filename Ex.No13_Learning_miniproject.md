@@ -1,4 +1,4 @@
-# Ex.No: 13 Learning – Use Supervised Learning  
+# Ex.No: 13 Mini-Project Stock Price Prediction
 ### DATE:30.09.2024                                                                            
 ### REGISTER NUMBER : 212222220007
 ## AIM
