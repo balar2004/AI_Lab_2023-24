@@ -67,7 +67,7 @@ model.add(layers.Dense(1))
 
 model.compile(optimizer='adam', loss='mse')
 
-print("NAME: DARIO G  \nREGISTER NUMBER: 212222230027 \n        ")
+print("NAME: Bala R  \nREGISTER NUMBER: 21222222007 \n        ")
 model.summary())
 
 model.fit(X_train1,y_train,epochs=30, batch_size=15)
