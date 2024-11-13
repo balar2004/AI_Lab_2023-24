@@ -1,5 +1,6 @@
 # Ex.No: 9  Logic Programming –  Computer Maintenance Expert System
-### DATE:16.09.2024                                                                     
+### DATE : 19.09.2024
+### Name : Bala R
 ### REGISTER NUMBER : 212222220007
 ### AIM: 
 Write a Prolog program to build a computer maintenance expert system.
