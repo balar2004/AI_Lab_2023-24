@@ -1,5 +1,7 @@
-# Ex.No: 13 Mini-Project Stock Price Prediction
-### DATE:30.09.2024                                                                            
+# Ex.No: 13 Machine Learning - MiniProject
+### Project Stock Price Prediction
+### DATE:24.10.2024
+### Name : Bala R
 ### REGISTER NUMBER : 212222220007
 ## AIM
 
