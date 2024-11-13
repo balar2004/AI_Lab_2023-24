@@ -1,4 +1,4 @@
-# Ex.No:4 Implementation of Alpha Beta Pruning 
+# Ex.No: 4 Implementation of Alpha Beta Pruning 
 ### DATE : 22.08.2024
 ### Name : Bala R
 ### REGISTER NUMBER : 212222220007
