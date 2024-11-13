@@ -1,5 +1,6 @@
 # Ex.No: 2  Implementation of Depth First Search
-### DATE:12.08.2024                                                                       
+### DATE : 08.08.2024
+### Name : Bala R
 ### REGISTER NUMBER :212222220007
 
 ### AIM: 
