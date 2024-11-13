@@ -1,5 +1,6 @@
 # Ex.No: 7  Logic Programming –  Logic Circuit Design
-### DATE:09.09.2024                                                                            
+### DATE : 12.09.2024                                                                           
+### Name : Bala R
 ### REGISTER NUMBER : 212222220007
 ### AIM: 
 To write a logic program to design a circuit like half adder and half subtractor.
