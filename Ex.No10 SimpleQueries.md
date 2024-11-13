@@ -1,5 +1,6 @@
 # Ex.No: 10  Logic Programming –  Simple queries from facts and rules
-### DATE:16.09.2024                                                                           
+### DATE : 26.09.2024  
+### Name : Bala R
 ### REGISTER NUMBER : 212222220007
 ### AIM: 
 To write a prolog program to find the answer of query. 
